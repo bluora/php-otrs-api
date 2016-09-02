@@ -1,0 +1,25 @@
+{
+    "name": "bluora/php-otrs-api",
+    "description": "Provides an interface to OTRS SOAP API",
+    "keywords": ["otrs", "soap", "api", "php"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rocco Howard",
+            "email": "rocco@bluora.com.au"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*",
+        "codeclimate/php-test-reporter": "dev-master",
+        "phpmd/phpmd" : "@stable"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bluora\\Otrs\\": "src/"
+        }
+    }
+}
