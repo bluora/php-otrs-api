@@ -265,8 +265,6 @@ class Otrs
             $name
         );
 
-        print_r($payload);
-
         $result = $this->connection->__soapCall('Dispatch', $payload);
 
         if (!empty($result) && is_array($result)) {
