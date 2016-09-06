@@ -7,14 +7,14 @@ class Otrs
     /**
      * Tracing to enable getLast* methods.
      *
-     * @var boolean
+     * @var bool
      */
     private static $trace = false;
 
     /**
      * The standard OTRS rpc file.
      *
-     * @var boolean
+     * @var bool
      */
     private static $rpc = 'rpc.pl';
 
@@ -84,6 +84,7 @@ class Otrs
         $this->setEnv('uri');
         $this->setEnv('username');
         $this->setEnv('password');
+
         return $this;
     }
 
@@ -96,13 +97,13 @@ class Otrs
         }
 
         $this->connection = new \SoapClient(null, [
-            'location'   => $this->location . static::$rpc,
+            'location'   => $this->location.static::$rpc,
             'uri'        => $this->uri,
             'trace'      => static::$trace,
             'login'      => $this->username,
             'password'   => $this->password,
             'style'      => SOAP_RPC,
-            'use'        => SOAP_ENCODED
+            'use'        => SOAP_ENCODED,
         ]);
 
         return $this;
@@ -111,7 +112,7 @@ class Otrs
     /**
      * Enable or disable the trace.
      *
-     * @param boolean $true_or_false
+     * @param bool $true_or_false
      */
     public static function setTrace($true_or_false)
     {
@@ -121,7 +122,7 @@ class Otrs
     /**
      * Change the default rpc.pl name.
      *
-     * @param boolean $name
+     * @param bool $name
      */
     public static function setRpc($name)
     {
@@ -137,6 +138,7 @@ class Otrs
                 return $this->$method($set_value);
             }
         }
+
         return $this;
     }
 
@@ -152,8 +154,9 @@ class Otrs
         if (!empty($module)) {
             $this->module = $module.'Object';
         } else {
-            $this-$module = '';
+            $this - $module = '';
         }
+
         return $this;
     }
 
@@ -168,6 +171,7 @@ class Otrs
     {
         $this->location = $location;
         $this->connection = false;
+
         return $this;
     }
 
@@ -182,6 +186,7 @@ class Otrs
     {
         $this->username = $username;
         $this->connection = false;
+
         return $this;
     }
 
@@ -196,6 +201,7 @@ class Otrs
     {
         $this->password = $password;
         $this->connection = false;
+
         return $this;
     }
 
@@ -210,6 +216,7 @@ class Otrs
     {
         $this->uri = $uri;
         $this->connection = false;
+
         return $this;
     }
 
@@ -217,7 +224,7 @@ class Otrs
      * Set a value for the request.
      *
      * @param string $key
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return Otrs
      */
@@ -240,13 +247,15 @@ class Otrs
             $result[] = $key;
             $result[] = $value;
         }
+
         return $result;
     }
 
     /**
      * Dispatch the soap call.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return result
      */
     private function dispatch($name)
@@ -273,9 +282,10 @@ class Otrs
             for ($i = 0; $i < count($result); $i = $i + 2) {
                 $assoc_result[$result[$i]] = $result[$i + 1];
             }
+
             return $assoc_result;
         }
-        
+
         return [];
     }
 
@@ -291,6 +301,7 @@ class Otrs
                 $this->set($key, $value);
             }
         }
+
         return $this->dispatch(ucfirst($name));
     }
 }
